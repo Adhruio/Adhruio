@@ -10,7 +10,7 @@ local Window = Rayfield:CreateWindow({
 
    ConfigurationSaving = {
       Enabled = true,
-      FolderName = Hubs, -- Create a custom folder for your hub/game
+      FolderName = "Hubs", -- Create a custom folder for your hub/game
       FileName = "Forapple Hub"
    },
 
