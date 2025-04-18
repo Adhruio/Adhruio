@@ -1,35 +1,70 @@
-local Window = Rayfield:CreateWindow({
-   Name = "Forsaken RP",
-   Icon = 1070038815,
-   LoadingTitle = "ForSaken RP Script!",
-   LoadingSubtitle = "by ps5_lover13544",
-   Theme = "Default",
-
-   DisableRayfieldPrompts = false,
-   DisableBuildWarnings = false,
-
-   ConfigurationSaving = {
-      Enabled = true,
-      FolderName = "Hubs", -- Corrected this to a string
-      FileName = "Forapple Hub"
-   },
-
-   Discord = {
-      Enabled = false,
-      Invite = "", -- Empty if no invite
-      RememberJoins = false
-   },
-
-   KeySystem = true,
-   KeySettings = {
-      Title = "Enter the Key!",
-      Subtitle = "Forsaken RP Key",
-      Note = "Key is Roleplay!",
-      FileName = "Key System",
-      SaveKey = true,
-      GrabKeyFromSite = false, -- Make sure this is true if you have a site for the key
-      Key = {"Roleplay"} -- Ensure this is properly meaningful and formatted
-   }
-})
-
-Rayfield:Init()
+loadstring(game:HttpGet('https://pastebin.com/raw/cwDSpepQ', true))()
+local first = library:AddWindow('Niklus Hub')
+local first_tab = first:AddTab('rah')
+local rah = false
+local meat = false
+local coin = false
+first_tab:AddSwitch('Autofarm', function(a)
+    rah = a
+end)
+first_tab:AddSwitch('Auto Collect meat shit', function(a)
+    meat = a
+end)
+first_tab:AddSwitch('Auto Collect Coins', function(a)
+    coin = a
+end)
+local RemoteEvent = game:GetService("ReplicatedStorage").RemoteEvent
+local last = math.huge
+local nearest = nil
+local id = nil
+spawn(function()
+    while wait() do
+        for i,v in pairs(game.workspace:GetChildren()) do	
+            if v:FindFirstChild('CharId') and rah then
+                local distance = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v:FindFirstChildWhichIsA('Part').Position).magnitude
+                if distance < last then
+                    last = distance
+                    nearest = v:FindFirstChildWhichIsA('Part') 
+                    id = v.CharId.Value
+                end
+            end
+        end
+    end
+end)
+spawn(function()
+    while wait() do
+        for i,v in pairs(game.workspace:GetChildren()) do	
+            if nearest ~= nil and id ~= nil and v:FindFirstChild('CharId') and rah and v.CharId.Value == id then
+                RemoteEvent:FireServer("Animal Selected", v.CharId.Value)
+                repeat
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = nearest.CFrame
+                for i = 1,10 do
+                    RemoteEvent:FireServer("Animal Hit", v.CharId.Value)
+                end
+                wait()
+                until not v or not v:FindFirstChild('CharId') or not v:FindFirstChildWhichIsA('Part') or not nearest or not nearest.Parent or not rah
+                last,nearest,id = math.huge, nil, nil
+            end
+        end
+    end
+end)
+spawn(function()
+    while wait() do
+        if meat then
+            for i,v in pairs(game.workspace:GetChildren()) do 
+                if string.find(v.Name:lower(), "meat") and v.Name ~= "DropOffMeat" and v:FindFirstChild("Main") then
+                    v.Main.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+                end
+            end
+            RemoteEvent:FireServer('Drop Off Meat')
+            RemoteEvent:FireServer('Collect Grill Coins')
+        end
+        if coin then
+            for i,v in pairs(game:GetService("Workspace").Currency:GetChildren()) do
+                if v:FindFirstChildWhichIsA('Part') and v:FindFirstChildWhichIsA('Part'):FindFirstChild('TouchInterest') then
+                    v:FindFirstChildWhichIsA('Part').CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+                end
+            end
+        end
+    end
+end)
