@@ -24,7 +24,13 @@ end)
 
 -- Adding a button for Infinite Yield execution
 first_tab:AddButton('Execute Infinite Yield', function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()  -- Correctly formatted
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/refs/heads/master/source"))()
+
+game:GetService("StarterGui"):SetCore("SendNotification", {
+    Title = "infinite yield nerded!!",
+    Text = "https://github/EdgeIY",
+    Icon = "rbxassetid://86501960555905"
+})
 end)
 
 -- Remote event setup
