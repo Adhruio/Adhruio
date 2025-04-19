@@ -1,4 +1,3 @@
-loadstring(game:HttpGet('https://pastebin.com/raw/cwDSpepQ', true))()
 local first = library:AddWindow('Niklus Hub')
 local first_tab = first:AddTab('rah')
 local rah = false
