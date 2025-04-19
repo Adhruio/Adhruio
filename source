@@ -202,3 +202,28 @@ end)
 
 -- Initialize the WalkSpeed to the default value
 updateWalkSpeed(16)
+
+-- Anti-AFK Script
+
+local player = game.Players.LocalPlayer
+local userInputService = game:GetService("UserInputService")
+
+-- Function to simulate player activity
+local function keepActive()
+    while wait(10) do -- Adjust the wait time as needed
+        if player.Character and player.Character:FindFirstChild("Humanoid") then
+            -- Move player slightly to simulate activity
+            player.Character.HumanoidRootPart.CFrame = player.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -0.1)
+        end
+    end
+end
+
+-- Create a toggle for the Anti-AFK in the GUI
+second_Tab:AddToggle('Toggle Anti-AFK', false, function(state)
+    if state then
+        keepActive() -- Start the anti-AFK loop
+    else
+        -- You can create a method to safely stop the anti-AFK if needed
+        -- If the anti-AFK is running in a separate function, implement a way to stop it
+    end
+end)
