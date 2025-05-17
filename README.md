@@ -3,7 +3,7 @@
 - 🌱 I’m currently learning Fix Bugs
 - 💞️ I’m looking to collaborate on Geode
 - 📫 How to reach me?
-- 😄 Pronouns: Geode, Geometry Dash, Roblox
+- 😄 Pronouns: Geode, Geometry Dash, Roblox, Scripts, Roblox Scripts
 - ⚡ Fun fact: Use Geode!
 
 <!---
