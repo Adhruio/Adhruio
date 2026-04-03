@@ -24,7 +24,7 @@ end)
 
 -- Adding a button for Infinite Yield execution
 first_tab:AddButton('Execute Infinite Yield', function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/refs/heads/master/source"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Adhruio/infiniteyield/refs/heads/master/source"))()
 
 game:GetService("StarterGui"):SetCore("SendNotification", {
     Title = "infinite yield nerded!!",
